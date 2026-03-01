@@ -2,7 +2,7 @@
 
 **Hudson Valley, NY** | scott@hudsonvalleyforestry.com | [github.com/sansscott](https://github.com/sansscott)
 
-I design and deploy production systems end-to-end — off-grid mesh networks for field operations, live algorithmic trading infrastructure on prediction markets, and applied AI pipelines with real-world deployment. I operate these systems under actual conditions: crews in dense canopy with no cell coverage, real capital at risk on Polymarket and Kalshi, and 97+ Docker containers running in production on self-managed bare-metal.
+I design and deploy production systems end-to-end — off-grid mesh networks for field operations, live algorithmic trading infrastructure on prediction markets, and applied AI pipelines with real-world deployment. I operate these systems under actual conditions: crews in dense canopy with no cell coverage, real capital at risk across regulated markets, and 97+ Docker containers running in production on self-managed bare-metal.
 
 ---
 
@@ -32,21 +32,21 @@ Full Reticulum MANET stack for HVF field operations. Transport node peered to th
 
 ---
 
-## Prediction Market Trading
+## Prediction Market & Futures Trading
 
-I run systematic strategies across Polymarket and Kalshi — two of the primary regulated venues for binary event contracts in the US. The work sits at the intersection of market microstructure, probabilistic forecasting, and execution infrastructure.
+I run systematic strategies across regulated binary event markets and futures. The work sits at the intersection of market microstructure, probabilistic forecasting, and execution infrastructure.
 
 **Current book:**
 
-| Market | Exchange | Strategy | Sizing |
-|---|---|---|---|
-| Binary event arb | Polymarket CLOB | Cross-market mispricing · YES/NO spread capture | Kelly criterion · 924 active markets monitored |
-| Binary event arb | Kalshi | Spread arbitrage · event correlation | Per-market circuit breakers · $300 max exposure |
-| Weather/climate | Polymarket | Data-driven edge · NOAA/NSIDC/NCEI ingestion | 25% fractional Kelly |
+| Market | Strategy | Sizing |
+|---|---|---|
+| Binary event arb | Cross-market mispricing · spread capture | Kelly criterion · 900+ active markets monitored |
+| Futures | Spread arbitrage · macro event correlation | Per-market circuit breakers · defined exposure caps |
+| Weather/climate | Data-driven edge · NOAA/NSIDC/NCEI ingestion | 25% fractional Kelly |
 
 **Approach**: I focus on markets where public data creates a systematic edge — weather outcomes, climate indices, macro event correlations. Position sizing follows fractional Kelly criterion. Risk controls include per-market circuit breakers, daily loss limits, and correlation-aware exposure caps.
 
-**Infrastructure**: Real-time WebSocket feeds across 1,848 contract tokens. Event-driven execution architecture. Custom risk engine with configurable thresholds per market type. Live P&L tracking against a PostgreSQL backend.
+**Infrastructure**: Real-time WebSocket feeds across 1,800+ contract tokens. Event-driven execution architecture. Custom risk engine with configurable thresholds per market type. Live P&L tracking against a PostgreSQL backend.
 
 The execution layer is proprietary. The edge is in the data sourcing and market selection, not latency.
 
@@ -112,7 +112,7 @@ Infra:        TrueNAS · Docker/Compose · Proxmox · Cloudflare Zero Trust · n
 Data:         PostgreSQL · pgvector · InfluxDB · Redis · Grafana
 Networking:   Reticulum · ATAK CoT · UniFi UDM-SE · APRS · Cloudflare WARP
 AI/LLM:       Claude API · Ollama · nomic-embed-text · MCP toolchain · Whisper
-Trading:      Polymarket CLOB · Kalshi API · Kelly criterion · CCXT · NinjaTrader
+Trading:      Futures · Binary event markets · Kelly criterion · NinjaTrader · CCXT
 ```
 
 ---
