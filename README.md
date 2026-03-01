@@ -32,18 +32,23 @@ Full Reticulum MANET stack for HVF field operations. Transport node peered to th
 
 ---
 
-## Live Prediction Market Trading Systems
+## Prediction Market Trading
 
-I run live algorithmic trading bots on Polymarket (CLOB-based binary prediction markets) and Kalshi (regulated US prediction exchange). These are production systems with real capital, real risk management, and continuous uptime requirements — not backtesting frameworks.
+I run systematic strategies across Polymarket and Kalshi — two of the primary regulated venues for binary event contracts in the US. The work sits at the intersection of market microstructure, probabilistic forecasting, and execution infrastructure.
 
-| Repo | Exchange | Mode | Strategy | Risk Controls |
-|---|---|---|---|---|
-| [aetherclaw](https://github.com/sansscott/aetherclaw) | Polymarket | **Live** | YES/NO binary arbitrage · Kelly criterion sizing | 924 markets, 1848 WS tokens |
-| [kalshi-arb](https://github.com/sansscott/kalshi-arb) | Kalshi | **Live** | Binary spread arbitrage · per-market circuit breakers | $75 max position · $300 exposure · $30 daily loss |
-| [stormclaw](https://github.com/sansscott/stormclaw) | Polymarket | Paper | Weather-edge prediction · NOAA/NSIDC/NCEI data | 25% Kelly fraction · $50 max bet |
-| [polybot](https://github.com/sansscott/polybot) | Polymarket | Dev | BTC latency arbitrage · low-latency execution | Rust for critical path |
+**Current book:**
 
-**Key techniques**: CLOB order book analysis · Kelly criterion position sizing · statistical arbitrage · real-time WebSocket market data · execution algorithms · risk-managed automated trading · event-driven architecture
+| Market | Exchange | Strategy | Sizing |
+|---|---|---|---|
+| Binary event arb | Polymarket CLOB | Cross-market mispricing · YES/NO spread capture | Kelly criterion · 924 active markets monitored |
+| Binary event arb | Kalshi | Spread arbitrage · event correlation | Per-market circuit breakers · $300 max exposure |
+| Weather/climate | Polymarket | Data-driven edge · NOAA/NSIDC/NCEI ingestion | 25% fractional Kelly |
+
+**Approach**: I focus on markets where public data creates a systematic edge — weather outcomes, climate indices, macro event correlations. Position sizing follows fractional Kelly criterion. Risk controls include per-market circuit breakers, daily loss limits, and correlation-aware exposure caps.
+
+**Infrastructure**: Real-time WebSocket feeds across 1,848 contract tokens. Event-driven execution architecture. Custom risk engine with configurable thresholds per market type. Live P&L tracking against a PostgreSQL backend.
+
+The execution layer is proprietary. The edge is in the data sourcing and market selection, not latency.
 
 ---
 
@@ -75,7 +80,7 @@ AI-powered multi-brand contractor registry SaaS. Custom JWT auth + magic-link vi
 
 ### Production Infrastructure
 
-Self-managed bare-metal infrastructure running 97+ Docker containers in production on TrueNAS (node4), with Proxmox cold-standby (node6) and automated failover. All access via Cloudflare Zero Trust — no open ports. This is not hobby infrastructure; it runs HVF business operations, live trading bots, agentic AI toolchains, and mesh networking nodes 24/7.
+Self-managed bare-metal infrastructure running 97+ Docker containers in production on TrueNAS (node4), with Proxmox cold-standby (node6) and automated failover. All access via Cloudflare Zero Trust — no open ports. This is not hobby infrastructure; it runs HVF business operations, live trading strategies, agentic AI toolchains, and mesh networking nodes 24/7.
 
 - **[node6-backup-system](https://github.com/sansscott/node6-backup-system)** — Cold-standby DR on Proxmox. Three-layer health monitoring (ICMP + SSH + API), atomic locking, ZFS replication, tunnel token sync, failover/failback with zero external dependencies
 - **Self-healing network**: Cloudflare WARP Zero Trust tunnel, UniFi UDM-SE, auto-failover watchdog scripts, launchd service management
