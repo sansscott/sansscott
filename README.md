@@ -1,81 +1,115 @@
-# Scott Sans
+# Scott Sans — MANET Engineer · Prediction Market Trader · Applied AI Systems
 
-**Builder. Operator. Field engineer.**
+**Hudson Valley, NY** | scott@hudsonvalleyforestry.com | [github.com/sansscott](https://github.com/sansscott)
 
-I design and deploy systems that work in the real world — off-grid mesh networks, live trading infrastructure, AI-powered SaaS platforms, and tactical comms tools for crews working where there is no cell signal.
+I design and deploy production systems end-to-end — off-grid mesh networks for field operations, live algorithmic trading infrastructure on prediction markets, and applied AI pipelines with real-world deployment. I operate these systems under actual conditions: crews in dense canopy with no cell coverage, real capital at risk on Polymarket and Kalshi, and 97+ Docker containers running in production on self-managed bare-metal.
 
 ---
 
-## Open MANET Work
+## MANET & Tactical Mesh Networking
 
-Mobile Ad-hoc Networks are the backbone of resilient field operations. I build and operate open-source MANET infrastructure using Reticulum Network Stack — a cryptographically addressed, transport-agnostic mesh protocol designed to work over LoRa, TCP/IP, serial, and RF links with zero infrastructure dependency.
+Mobile Ad-hoc Networks are the backbone of resilient field operations in contested, degraded, and operationally limited (CDOL) environments. I build and operate open-source MANET infrastructure using the Reticulum Network Stack — a cryptographically addressed, transport-agnostic mesh protocol that operates over LoRa, TCP/IP, serial, and RF links with zero infrastructure dependency. Designed for delay-tolerant networking (DTN) and beyond line-of-sight (BLOS) communications where PACE plan contingencies require self-healing, self-organizing network topologies.
 
 ### [rns-atak-bridge](https://github.com/sansscott/rns-atak-bridge) — *public*
-Bridges Reticulum mesh peers into ATAK Cursor-on-Target (CoT) events. Makes off-grid mesh nodes visible as SA tracks in ATAK, iTAK, WinTAK, and TAK Server in real time. No internet. No server. Just mesh.
 
-**Stack**: Python · Reticulum RNS · ATAK CoT XML · UDP multicast  
-**Use case**: DoD/government situational awareness over zero-infrastructure mesh
+Bridges Reticulum mesh peers into ATAK Cursor-on-Target (CoT) events, making off-grid mesh nodes visible as situational awareness tracks in ATAK, iTAK, WinTAK, and TAK Server in real time. Enables common operating picture (COP) and position location information (PLI) sharing over a zero-infrastructure mesh — no internet, no cell, no server.
 
-### [THR-Manet](https://github.com/sansscott/THR-Manet) — *private*
-Full MANET stack for HVF field operations — forestry crews working in dense canopy with no cell coverage. Reticulum transport node (peered to global RNS backbone), NomadNet messaging, and MCP tool integration for remote mesh management.
+**Stack**: Python · Reticulum RNS · ATAK CoT XML · UDP multicast
+**Topics**: `manet` `atak` `cursor-on-target` `reticulum` `tak-server` `mesh-networking` `tactical-communications` `situational-awareness` `delay-tolerant-networking` `off-grid`
 
-**Interfaces**: AutoInterface (LAN) · TCP backbone peering · LoRa (planned) · Cloudflare Zero Trust tunnel  
-**Node identity**: af60a4f4863c9bff05a9871359d67e1f
+### [sycamore-mesh](https://github.com/sansscott/sycamore-mesh) — *private*
 
-### [Sycamore Mesh](https://github.com/sansscott/sycamore-mesh) — *private*
-Voice-first tactical comms and live tracking dashboard for ROW/pipeline/forestry field crews. Real-time node positions over WebSocket, Mapbox GL 3 terrain rendering, push-to-talk coordination. Built for crews who cannot rely on cellular.
+Voice-first tactical comms and live tracking dashboard for ROW/pipeline/forestry field crews operating in remote terrain. Real-time node positions over WebSocket, Mapbox GL 3 terrain rendering, push-to-talk coordination layer. Built for crews who cannot rely on cellular — a practical field operations MANET deployment.
 
 **Stack**: Node.js · Socket.io · React · Mapbox GL 3 · Zustand · Docker · Cloudflare Zero Trust
+**Topics**: `manet` `mesh-networking` `tactical-communications` `field-operations` `real-time` `push-to-talk`
+
+### [THR-Manet](https://github.com/sansscott/THR-Manet) — *private*
+
+Full Reticulum MANET stack for HVF field operations. Transport node peered to the global RNS backbone via Frankfurt. NomadNet propagation node for store-and-forward messaging. LoRa interface planned for RF link extension. Decentralized network coordination with cryptographic addressing and forward secrecy — no central authority, no single point of failure.
+
+**Node identity**: af60a4f4863c9bff05a9871359d67e1f
 
 ---
 
-## Production Infrastructure
+## Live Prediction Market Trading Systems
 
-Self-hosted infrastructure running 97+ Docker containers on TrueNAS (node4), Proxmox cold-standby (node6), and Mac Studio — all behind Cloudflare Zero Trust with no open ports.
+I run live algorithmic trading bots on Polymarket (CLOB-based binary prediction markets) and Kalshi (regulated US prediction exchange). These are production systems with real capital, real risk management, and continuous uptime requirements — not backtesting frameworks.
+
+| Repo | Exchange | Mode | Strategy | Risk Controls |
+|---|---|---|---|---|
+| [aetherclaw](https://github.com/sansscott/aetherclaw) | Polymarket | **Live** | YES/NO binary arbitrage · Kelly criterion sizing | 924 markets, 1848 WS tokens |
+| [kalshi-arb](https://github.com/sansscott/kalshi-arb) | Kalshi | **Live** | Binary spread arbitrage · per-market circuit breakers | $75 max position · $300 exposure · $30 daily loss |
+| [stormclaw](https://github.com/sansscott/stormclaw) | Polymarket | Paper | Weather-edge prediction · NOAA/NSIDC/NCEI data | 25% Kelly fraction · $50 max bet |
+| [polybot](https://github.com/sansscott/polybot) | Polymarket | Dev | BTC latency arbitrage · low-latency execution | Rust for critical path |
+
+**Key techniques**: CLOB order book analysis · Kelly criterion position sizing · statistical arbitrage · real-time WebSocket market data · execution algorithms · risk-managed automated trading · event-driven architecture
+
+---
+
+## Applied AI & Model Context Protocol (MCP)
 
 ### [node4-mcp-servers](https://github.com/sansscott/node4-mcp-servers) — *public*
-Self-hosted MCP (Model Context Protocol) server infrastructure — 20 microservices behind nginx exposing 125 tools to Claude Code and Open WebUI. Services span Home Assistant, Docker, InfluxDB, PostgreSQL, Reticulum, APRS, Whisper STT, Odoo, Hummingbot, PDF automation, OSHA lookup, weather safety, and more.
 
-### [node6-backup-system](https://github.com/sansscott/node6-backup-system) — *private*
-Automated cold-standby DR on Proxmox. Three-layer health monitoring (ICMP + SSH + API), atomic locking, ZFS replication, tunnel token sync, and failover/failback scripts. No external dependencies.
+Self-hosted Model Context Protocol (MCP) server infrastructure on TrueNAS — 20 microservices behind nginx exposing 125 tools to Claude Code and Open WebUI. A production agentic AI toolchain with LLM integration across: Home Assistant, Docker, InfluxDB, PostgreSQL, Reticulum, APRS, Whisper STT, Odoo CRM, Hummingbot, PDF automation, OSHA regulatory lookup, weather safety, contractor registry, and more.
 
-### [compintel-mcp](https://github.com/sansscott/compintel-mcp) — *public*
-Daily competitive intelligence scraping and analysis for the forestry mulching market in Hudson Valley NY and CT. MCP tool interface for Claude Code integration.
+**Stack**: Python · FastAPI · nginx · Docker · MCP SDK
+**Topics**: `mcp` `model-context-protocol` `self-hosted` `ai-tools` `agentic-ai` `llm`
 
----
+### AI & Automation Stack
 
-## Trading & Market Systems
-
-Live and paper prediction market bots across Polymarket and Kalshi, plus a Rust latency-arb engine.
-
-| Repo | Market | Status | Notes |
-|------|--------|--------|-------|
-| [aetherclaw](https://github.com/sansscott/aetherclaw) | Polymarket YES/NO | Live | 924 markets, 1848 WS tokens, Kelly sizing |
-| [kalshi-arb](https://github.com/sansscott/kalshi-arb) | Kalshi binary | Live | Per-market circuit breakers,  max exposure |
-| [stormclaw](https://github.com/sansscott/stormclaw) | Polymarket weather | Paper | NOAA + NSIDC + NCEI data ingestion |
-| [polybot](https://github.com/sansscott/polybot) | Polymarket BTC | Dev | Rust, low-latency execution |
+- **[upwork-ai-agent](https://github.com/sansscott/upwork-ai-agent)** — Semantic job scoring + automated proposal drafting via Claude API and Ollama embeddings (RAG pipeline, nomic-embed-text, pgvector)
+- **[obsidian-linker](https://github.com/sansscott/obsidian-linker)** — Semantic auto-tagger for Obsidian using local LLM embeddings (384-dim, Ollama, applied AI on personal knowledge)
+- **[whisper-stt-mcp](https://github.com/sansscott/whisper-stt-mcp)** — Self-hosted Whisper speech-to-text MCP server; OpenAI-compatible API for field meeting transcription
+- **[claude-mattermost-bridge](https://github.com/sansscott/claude-mattermost-bridge)** — Async Claude Code ↔ Mattermost bridge for remote AI operations
 
 ---
 
-## AI & Automation
+## SaaS & Production Infrastructure
 
-- **[upwork-ai-agent](https://github.com/sansscott/upwork-ai-agent)** — Semantic job scoring + automated proposal drafting via Claude API and Ollama embeddings
-- **[obsidian-linker](https://github.com/sansscott/obsidian-linker)** — Semantic auto-tagger for Obsidian vaults using nomic-embed-text (384-dim) via local Ollama
-- **[whisper-stt-mcp](https://github.com/sansscott/whisper-stt-mcp)** — Self-hosted Whisper STT MCP server for construction site meeting transcription
-- **[claude-mattermost-bridge](https://github.com/sansscott/claude-mattermost-bridge)** — Claude Code ↔ Mattermost bridge for async AI ops
+### [Sycamore-API](https://github.com/sansscott/Sycamore-API) — *private*
+
+AI-powered multi-brand contractor registry SaaS. Custom JWT auth + magic-link via Resend. Stripe $19/mo payments. Semantic search with nomic-embed-text (384-dim pgvector embeddings via Ollama). 1,370+ seeded contractors across mulch/ROW verticals. Multi-brand routing (sycamore-mulch.com, sycamore-row.com). Ranked #1 on Google within days of launch — production-deployed, revenue-generating.
+
+**Stack**: Next.js 14 · TypeScript · PostgreSQL/pgvector · Ollama · Stripe · Resend · Docker
+
+### Production Infrastructure
+
+Self-managed bare-metal infrastructure running 97+ Docker containers in production on TrueNAS (node4), with Proxmox cold-standby (node6) and automated failover. All access via Cloudflare Zero Trust — no open ports. This is not hobby infrastructure; it runs HVF business operations, live trading bots, agentic AI toolchains, and mesh networking nodes 24/7.
+
+- **[node6-backup-system](https://github.com/sansscott/node6-backup-system)** — Cold-standby DR on Proxmox. Three-layer health monitoring (ICMP + SSH + API), atomic locking, ZFS replication, tunnel token sync, failover/failback with zero external dependencies
+- **Self-healing network**: Cloudflare WARP Zero Trust tunnel, UniFi UDM-SE, auto-failover watchdog scripts, launchd service management
+- **Observability**: InfluxDB time-series + Grafana dashboards across all production services
+
+---
+
+## Ham Radio & Mesh Networking Operator
+
+Licensed amateur radio operator. Operate a Reticulum node peered to the global RNS backbone. Built the ATAK CoT bridge (rns-atak-bridge) for situational awareness integration — open source, publicly available. APRS tracking integrated into production MCP toolchain. Actively building toward LoRa RF link integration for true off-grid MANET capability independent of IP backhaul.
 
 ---
 
 ## Field Context
 
-I run [Hudson Valley Forestry](https://hudsonvalleyforestry.com) — commercial mulching and land clearing across NY and CT. The mesh networking, tactical comms, and field operations tooling I build is used in actual production environments: crews in remote terrain, equipment on job sites, coordination without cell coverage. This is not theoretical infrastructure.
+I run [Hudson Valley Forestry](https://hudsonvalleyforestry.com) — commercial mulching and land clearing across NY and CT. The MANET infrastructure, tactical comms, and field operations tooling I build is used in real production environments: crews in remote terrain, equipment on job sites without cellular. The trading systems manage real capital with live market exposure. The AI toolchain handles real business workflows — CRM intake, competitor intelligence, analytics, lead routing.
+
+This is not theoretical.
 
 ---
 
-## Stack at a Glance
+## Technical Stack
 
-
+```
+Languages:    Python · TypeScript · Rust · Shell · SQL · C# (NinjaTrader)
+Frontend:     React · Mapbox GL 3 · Socket.io · HTMX · Vite · Next.js 14
+Backend:      FastAPI · Flask · Node.js · Express · Next.js API routes
+Infra:        TrueNAS · Docker/Compose · Proxmox · Cloudflare Zero Trust · nginx
+Data:         PostgreSQL · pgvector · InfluxDB · Redis · Grafana
+Networking:   Reticulum · ATAK CoT · UniFi UDM-SE · APRS · Cloudflare WARP
+AI/LLM:       Claude API · Ollama · nomic-embed-text · MCP toolchain · Whisper
+Trading:      Polymarket CLOB · Kalshi API · Kelly criterion · CCXT · NinjaTrader
+```
 
 ---
 
-*Open to applied work in field operations, defense infrastructure, prediction markets, and distributed systems. Reach out via [scott@hudsonvalleyforestry.com](mailto:scott@hudsonvalleyforestry.com)*
+*Open to applied work in field operations technology, defense infrastructure, prediction markets, distributed systems, and forward-deployed engineering. Reach out: [scott@hudsonvalleyforestry.com](mailto:scott@hudsonvalleyforestry.com)*
